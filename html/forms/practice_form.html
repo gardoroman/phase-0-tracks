@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Practice form</title>
+</head>
+<body>
+	<form name="success-form" action="./success.html" method="post">
+		<fieldset>
+			<div>      
+				<label>Food type:</label>
+				<select name="food-choice">
+			        <option value="none">None</option>
+			        <option value="pizza">Pizza</option>
+			        <option value="hamburger">Hamburger</option>
+			        <option value="salad">Salad</option>
+			        <option value="burrito">Burrito</option>
+      			</select>
+  			</div>
+  			<div>
+  				<label>Other choice:</label>
+  				<textarea name="choice" placeholder="If you don't like the choices above write down another choice"></textarea>
+  			</div>
+		    <div>
+		      <label>Full name:</label>
+		      <input type="text" name="fullname">
+		    </div>
+
+		    <div>
+		      <label>Telephone:</label>
+		      <input type="tel" name="telephone">
+		    </div>
+
+		    <div>
+		      <label>Password:</label>
+		      <input type="password" name="password">
+		    </div>
+		</fieldset>
+		<button type="submit">Time to eat!</button>
+	</form>
+</body>
+</html>
