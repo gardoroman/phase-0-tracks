@@ -1,3 +1,47 @@
-.octo-main {
+/*
+body {  
+  height: 100%;
   position: relative;
+  border: 6px solid red;
+  xxxheight: 600px;
+  background-color: gray;
+  xxxmargin-top: 25%;
+ xxx margin-bottom: 25%;
+  xxxmargin: 25% 25% 25% 25%;
+} */
+
+.octopus-main {
+  position: absolute;
+  background-color: gray;
+  height: 100%;
+  border: 21px solid pink;
+  
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
+
+#octo-body {
+  position: relative;
+  border: 1px solid red;
+  margin-left: auto;
+  margin-right: auto;
+  
+
+  vertical-align: middle;
+  
+*/
+  
+}
+#octo-hat {
+  margin-left: 25%;
+  margin-right: 25%;
+
+}
+
+#octo-glasses {
+  margin-left: 25%;
+  margin-right: 25%;
 }
