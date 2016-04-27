@@ -1,3 +1,14 @@
 section#contact-info p {
   font-size: .8em;
 }
+
+.job {
+  background-color: #e9e5dc;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.job-details {
+  font-size: .8em;
+} 
