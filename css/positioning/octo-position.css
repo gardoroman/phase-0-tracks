@@ -1,16 +1,8 @@
 
-/*body {  
-  width: 700px;
-} */
-
 
 #octo-body {
-  /*position: absolute;*/
   display: block;
-  border: 1px solid red;
   width: 210px;
-  /*margin-left: auto;
-  margin-right: auto;*/
   margin: 120px auto 0px auto;
   z-index: 1
   
@@ -18,24 +10,24 @@
 
 #octo-hat {
   position: absolute;
-  top: 35px;
+  top: 45px;
+  left: 0;
+  right: 0;
   display: block;
   width: 276px;
   margin-left: auto;
   margin-right: auto;
-  /*margin-top: -358px;*/
-  border: 1px solid red;
   z-index: 5
 }
 
 #octo-glasses {
   position: absolute;
-  top: 223px;
-  right: 45%;
+  top: 221px;
+  left: 0;
+  right: 0;
   display: block;
   width: 135px;
   margin-left: auto;
   margin-right: auto;
-  
   z-index: 5
 }
