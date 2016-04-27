@@ -1,47 +1,41 @@
-/*
-body {  
-  height: 100%;
-  position: relative;
-  border: 6px solid red;
-  xxxheight: 600px;
-  background-color: gray;
-  xxxmargin-top: 25%;
- xxx margin-bottom: 25%;
-  xxxmargin: 25% 25% 25% 25%;
+
+/*body {  
+  width: 700px;
 } */
 
-.octopus-main {
-  position: absolute;
-  background-color: gray;
-  height: 100%;
-  border: 21px solid pink;
-  
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-}
 
 #octo-body {
-  position: relative;
+  /*position: absolute;*/
+  display: block;
   border: 1px solid red;
-  margin-left: auto;
-  margin-right: auto;
-  
-
-  vertical-align: middle;
-  
-*/
+  width: 210px;
+  /*margin-left: auto;
+  margin-right: auto;*/
+  margin: 120px auto 0px auto;
+  z-index: 1
   
 }
-#octo-hat {
-  margin-left: 25%;
-  margin-right: 25%;
 
+#octo-hat {
+  position: absolute;
+  top: 35px;
+  display: block;
+  width: 276px;
+  margin-left: auto;
+  margin-right: auto;
+  /*margin-top: -358px;*/
+  border: 1px solid red;
+  z-index: 5
 }
 
 #octo-glasses {
-  margin-left: 25%;
-  margin-right: 25%;
+  position: absolute;
+  top: 223px;
+  right: 45%;
+  display: block;
+  width: 135px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  z-index: 5
 }
