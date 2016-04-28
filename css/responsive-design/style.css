@@ -1,3 +1,8 @@
+body {
+  max-width: 960px;
+  min-width: 300px;
+}
+
 blockquote {
   border-left: 5px solid blue;
   padding: 15px;
@@ -7,6 +12,24 @@ blockquote {
 cite {
   display: block;
   margin-top: 10px;
+}
+
+main {
+  position: absolute;
+  display: inline;
+  width: 50%;
+  /*vertical-align: top;*/
+  padding: 3%;  
+  vertical-align: top;
+  height: auto;
+}
+
+#external-links {
+  position: relative;
+  display: inline-block;
+  width: 20%;
+  padding: 3%;
+  vertical-align: top;  
 }
 
 #external-links ul {
@@ -29,4 +52,43 @@ figure {
 figcaption {
   font-style: italic;
   text-align: right;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    background-color: hotpink;
+  }
+}
+@media all and (min-width: 700px) {
+    body{
+        font-size: 18px;
+    }
+}
+ 
+@media all and (max-width: 699px) and (min-width: 400px) {
+    body{
+        font-size: 16px;
+    }
+}
+ 
+@media all and (max-width: 399px) {
+    body{
+        font-size: 12px;
+    }
+ 
+}
+@media screen and (min-aspect-ratio: 1/1) {
+  body {
+    background-color: red;
+  }
+}
+@media handheld and (orientation: landscape) {
+  body {
+    font-weight: bold;
+  }
+}
+@media handheld and (orientation: portrait) {
+    body{
+      font-size: 75%;
+    }
 }
