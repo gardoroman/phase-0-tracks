@@ -1,3 +1,8 @@
+body {
+  max-width: 960px;
+
+}
+
 blockquote {
   border-left: 5px solid blue;
   padding: 15px;
@@ -7,6 +12,27 @@ blockquote {
 cite {
   display: block;
   margin-top: 10px;
+}
+
+main {
+  position: absolute;
+  display: inline-block;
+  width: 756px;
+  
+  /*visibility: hidden;*/
+  /*vertical-align: ;*/
+  vertical-align: top;
+
+}
+
+#external-links {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  
+  vertical-align: top;
+  /*float: right;*/
+  
 }
 
 #external-links ul {
