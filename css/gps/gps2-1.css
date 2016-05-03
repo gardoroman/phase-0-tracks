@@ -1,3 +1,59 @@
-body {
-  background-color: gray;
+
+header {
+  display: block;
+}
+
+h1{
+  text-align: center;
+}
+
+p:hover{
+  font-style: italic;
+}
+
+.column-1, .column-2 {
+  display: inline-block;
+  width: 45%;
+  vertical-align: top;
+  padding: 10px; 
+}
+
+.column-1{
+  float: left;
+}
+.column-2{
+  float: right;
+  border: 2px dotted gray;
+  border-radius: 15px;
+}
+
+.column-1 h2{
+  color: blue
+}
+
+footer {
+  display: block;
+  color: white;
+  background-color:gray;
+  border: 1px solid blue;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#clear{
+  clear: both;
+  padding: 20px;
+}
+
+h2{
+  font-family: Helvetica;
+  color: red;
+}
+
+article:hover{
+  background-color: yellow;
+}
+
+header, footer{
+  color: pink;
 }
