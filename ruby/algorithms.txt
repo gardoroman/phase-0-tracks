@@ -47,3 +47,22 @@ Operation Override
   Stop elevator if at any moment the emergency button is pressed
 
 
+2) ALGORITHM FOR SUSTAINING BRAIN FUNCTION WITH COFFEE *
+
+While caffeine-level is low
+  Check to see if there is enough coffee:
+    if enough coffee
+      - measure roughly one tablespoons per 6 ounces of water
+      - place coffee in coffee filter
+      - pour 12 water in coffee machine
+      - set machine to brew
+      - add cream and sugar to taste
+      - enjoy
+      - repeat until caffeine-level is adequate
+    if not enough coffee
+      - curse violently
+      - run to nearest purveyor of caffeine
+
+NOTES:
+*Nicotine algorithm removed by developer's girlfriend
+
