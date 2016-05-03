@@ -1,0 +1,68 @@
+1) ALGORITHM FOR ELEVATOR-BOT
+
+Empty Queue
+  if up or down queue is empty, wait for a pick up request
+  Once pickup request is received begin Moving Elevator sequence
+
+Moving Elevator
+  if elevator is higher relative to pick up request 
+    until current floor is equal to the lowest floor number requested in down queue
+     -move elevator down to the highest floor number in the down queue and stop elevator
+      * remove floor number from the down queue
+      * follow Loading/Unloading Passengers procedures for any down requests between current floor and lowest requested floor number
+    -when lowest requested floor is reached return to Moving Elevator procedure
+  if elevator is lower relative to pick up request
+    until current floor is equal to the highest floor number requested in up queue
+    -move elevator up to lowest request floor number in up queue and stop elevator
+      * remove floor number from up queue
+      * follow Loading/Unloading Passengers procedures for any up requests between current floor and highest requested floor number
+    -when highest requested floor is reached return to Moving Elevator procedure
+  if elevator is on the same level
+    -initiate Loading Passengers procedure
+
+Loading/Unloading Passengers
+  If floor request is equal to current floor
+  -open door
+  -if there are any new floor request
+    *Follow Update Floors sequence
+    *check that weight is not greater than carrying capacity
+    *wait five seconds and then close door
+    *continue Moving Elevator sequence
+  -else if no floor request or empty queue
+   * Follow Empty Queue Procedure
+  
+
+Update Floors
+  -if requests is greater than current floor
+      put request in the up queue
+   else
+      put request in the down queue
+
+Updates in Transit
+ if a floor request is made in transit
+  -Follow Update Floors Procedure
+ 
+
+Operation Override
+  Stop elevator if at any moment the emergency button is pressed
+
+
+2) ALGORITHM FOR SUSTAINING BRAIN FUNCTION WITH COFFEE *
+
+While caffeine-level is low
+  Check to see if there is enough coffee:
+    if enough coffee
+      - measure roughly one tablespoons per 6 ounces of water
+      - place coffee in coffee filter
+      - pour 12 water in coffee machine
+      - set machine to brew
+      - add cream and sugar to taste
+      - enjoy
+      - repeat until caffeine-level is adequate
+    if not enough coffee
+      - curse violently
+      - run to nearest purveyor of caffeine
+
+NOTES:
+*Nicotine algorithm removed by developer's girlfriend
+
