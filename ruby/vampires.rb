@@ -60,10 +60,12 @@ while loop_count < total_number
     message = "Results Inconclusive"
   end
 
-  # Had to separate checks for "short circuit" labels
+  # Had to separate checks in order to force the proper messages for certain responses
   if (allergies == 'sunshine')
     message = "Probably a vampire"
-  elsif (name == "Drake Cula") || (name == "Tu Fang") || (name == "Dr. Acula") 
+  end
+
+  if (name == "Drake Cula") || (name == "Tu Fang") || (name == "Dr. Acula") 
     message = "Definitely a vampire"
   end
 
@@ -71,3 +73,6 @@ while loop_count < total_number
   puts ""
   loop_count += 1
 end
+
+#Final message
+puts  "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
