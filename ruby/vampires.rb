@@ -1,5 +1,5 @@
 puts "What is your name?"
-name = gets.chomp.downcase
+name = gets.chomp
 puts "How old are you?"
 age = gets.chomp.to_i
 puts "Should we order garlic bread for you? (y,n)"
@@ -8,7 +8,6 @@ until (likes_garlic_bread  == 'n') or (likes_garlic_bread == 'y')
   puts "please enter y or n"
   likes_garlic_bread = gets.chomp
 end
-
 puts "Would you like to enroll in our company insurance plan? (y,n)"
 needs_insurance = gets.chomp.downcase
 until (needs_insurance  == 'n') or (needs_insurance == 'y')
@@ -30,14 +29,19 @@ else
 end
 
 case true
-when (age < 110) && needs_insurance
-  puts "Probably not a vampire"
-when (age >= 110) && !likes_garlic_bread
-  puts "Probably a vampire"
+when (age < 110) && (needs_insurance || likes_garlic_bread)
+  message = "Probably not a vampire"
+when (age >= 110) && (!likes_garlic_bread || !needs_insurance)
+  message = "Probably a vampire"
 when (age >= 110) && !likes_garlic_bread && !needs_insurance
-  puts "Almost certainly a vampire"
-when (name == "drake cula") || (name == "Tu Fang")
-  puts "Definitely a vampire"
+  message = "Almost certainly a vampire"
 else
-  puts "Results Inconclusive"
+  message = "Results Inconclusive"
 end
+
+# Had to separate name check from case statement 
+if (name == "Drake Cula") || (name == "Tu Fang") || (name == "Dr. Acula")
+  message = "Definitely a vampire"
+end
+
+puts message
