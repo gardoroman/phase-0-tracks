@@ -5,10 +5,13 @@ loop_count = 0
 puts "How many employees?"
 total_number = gets.chomp.to_i
 while loop_count < total_number
+  puts ""
   puts "What is your name?"
   name = gets.chomp
+  puts ""
   puts "How old are you?"
   age = gets.chomp.to_i
+  puts ""
   puts "In what year were born?"
   birth_year = gets.chomp.to_i
   if birth_year + age == current_year
@@ -16,22 +19,25 @@ while loop_count < total_number
   else
     correct_age = false
   end
-  puts "Correct age is #{correct_age}"
+  puts ""
   puts "Should we order garlic bread for you? (y,n)"
   likes_garlic_bread = gets.chomp.downcase
-  until (likes_garlic_bread  == 'n') or (likes_garlic_bread == 'y')
+  until (likes_garlic_bread  == 'n') || (likes_garlic_bread == 'y')
     puts "please enter y or n"
     likes_garlic_bread = gets.chomp
   end
+  puts ""
   puts "Would you like to enroll in our company insurance plan? (y,n)"
   needs_insurance = gets.chomp.downcase
-  until (needs_insurance  == 'n') or (needs_insurance == 'y')
+  until (needs_insurance  == 'n') || (needs_insurance == 'y')
     puts "please enter y or n"
     needs_insurance = gets.chomp
   end
+  puts ""
   puts "Please list your allergies. Write 'done' when finished"
   allergies = gets.chomp.downcase
-  until (allergies  == 'done') or (allergies == 'sunshine')
+  until (allergies  == 'done') || (allergies == 'sunshine')
+    puts ""
     puts "Any more allergies?"
     allergies = gets.chomp
   end
@@ -69,10 +75,12 @@ while loop_count < total_number
     message = "Definitely a vampire"
   end
 
+  puts ""
   puts message
   puts ""
   loop_count += 1
 end
 
 #Final message
+puts ""
 puts  "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
