@@ -36,7 +36,10 @@ end
 
 #convert_client_data converts string input into the appropriate data type
 def convert_client_data(input_hash)
-  x = 1
+  input_hash[:age] = input_hash[:age].to_i
+  input_hash[:"number of children"] = input_hash[:"number of children"].to_i
+  input_hash[:budget] = input_hash[:budget].to_i
+  return input_hash
 end
 
 #asks designer if changes are needed and then corrects the entries
@@ -57,6 +60,14 @@ end
 #Application Section
 client_hash =  get_client_data(client_array)
 client_hash.default = "Item Not Found"
+client_hash = convert_client_data(client_hash)
+#print_client_data(client_hash)
 
-print_client_data(client_hash)
-print_client_data(update_client_data(client_hash))
+puts "Printing Client Record"
+puts client_hash
+puts ""
+
+update_client_data(client_hash)
+client_hash = convert_client_data(client_hash)
+puts "Printing Updated Record"
+puts client_hash
