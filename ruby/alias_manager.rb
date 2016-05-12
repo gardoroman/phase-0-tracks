@@ -70,7 +70,7 @@ end
 
 # DRIVER CODE
 agent_list = prompt_user()
-p agent_list
+
 print_agents(agent_list)
 
 
