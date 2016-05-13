@@ -1,25 +1,71 @@
 #Exercise 5.5 Nested Data Structures
-miles_davis = {
-album: 'Kind of Blue',
-released: 'August 17, 1959',
-recorded: 'March 2, 1959 – April 22, 1959',
-label: 'Columbia',
-personnel: {
-  trumpet: 'Miles Davis', 
-  piano: 'Bill Evans',
-  tenor_sax: 'John Coltrane',
-  alto_sax: 'Cannonball Adderley',
-  bass: 'Paul Chambers',
-  drums: 'Jimmy Cobb'
-},
-songs: [
-  'So What',
-  'Freddie Freeloader',
-  'Blue in Green',
-  'All Blues',
-  'Flamenco Sketches',
-]
-}
+artist = {
+  "Miles Davis" => {
+      
+    "Kind of Blue" => {
+    released: "August 17, 1959",
+    recorded: "03/02/1959 – 04/22/1959",
+    label: "Columbia",
+    personnel: {
+      trumpet: "Miles Davis", 
+      piano: "Bill Evans",
+      tenor_sax: "John Coltrane",
+      alto_sax: "Cannonball Adderley",
+      bass: "Paul Chambers",
+      drums: "Jimmy Cobb"
+    },
+    songs: [
+      "So What",
+      "Freddie Freeloader",
+      "Blue in Green",
+      "All Blues",
+      "Flamenco Sketches"
+    ]
+    },
+    "Miles Davis All Stars, Volume 1" => {
+    released: "1955",
+    recorded: "12/24/1954",
+    label: "Prestige",
+    personnel: {
+      trumpet: "Miles Davis", 
+      piano: "Thelonius Monk",
+      vibraphone: "Milt Jackson",
+      bass: "Percy Heath",
+      drums: "Kenny Clarke"
+    },
+    songs: [
+      "Bag's Groove",
+      "Swing Spring"
+    ]
+    }
+    
+    
+  },
+  "Ahmad Jamal" => {
+    "At the Pershing" => {
+    released: "1958",
+    recorded: "01/16/1958",
+    label: "Argo",
+    personnel: {
+      piano: "Ahmad Jamal",
+      bass: "Israel Crosby",
+      drums: "Vernel Fournier"
+    },
+    songs: [
+      "But Not For Me",
+      "Surrey with the Fringe on Top",
+      "Moonlight in Vermont",
+      "Put Another Nickel in",
+      "No Greater Love",
+      "Poinciana",
+      "Woody N' You",
+      "What's New?"
+    ]
+    }
+  }
+
+} 
+
 
 puts "Showing personnel on the recording of 'Kind of Blue'"
 p miles_davis[:personnel]
