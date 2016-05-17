@@ -2,6 +2,9 @@
 #gives compliments on cookies received.
 class Santa
 
+  attr_reader  :ethnicity
+  attr_accessor :gender, :age
+
   #Initializes the Santa instance
   def initialize(gender, ethnicity)
     puts "Initializing Santa instance"
@@ -46,18 +49,16 @@ class Santa
   end
   
   #getter methods
-  def age
-    @age    
-  end
 
-  def gender
-    @gender    
-  end
+
+  #def gender
+  #  @gender    
+
 
   #setter methods
-  def gender=(new_gender)
-    @gender = new_gender
-  end
+  #def gender=(new_gender)
+  #  @gender = new_gender
+  #@end
 
 end #end of class
 
@@ -70,28 +71,49 @@ kris_kringle.speak
 kris_kringle.eat_milk_and_cookies("Chocalate Chip")
 
 
+#automatically generates santa instances by randomly selecting from gender and ethnic arrays.
+def santa_simulator
+  santa = []
+  example_genders = ["agender", "female", "bigender", "male", "female", "gender fluid", "N/A", "trans", "don't know"]
+  example_ethnicities = ["black", "Latino", "white", "Japanese-African", "prefer not to say", 
+    "Mystical Creature (unicorn)", "N/A", "Scottish", "Pinoy", "Nigerian"]
+  
+  gender_num = example_genders.length
+  ethnic_num = example_ethnicities.length
+  max_num = gender_num > ethnic_num ? gender_num : ethnic_num
 
-diverse_list = [
-  ["female", "Inuit"],
-  ["male","Scottish"],
-  ["agender","Canadian"],
-  ["bigender","Black-Korean"],
-  ["trans","European"],
-  ["don't ask","Latino"],
-  ["m","Nigerian"],
-  ["f","Egyptian"]
-]
+  
+  max_num.times do   
+    santa << Santa.new(example_genders[rand(gender_num)], example_ethnicities[rand(ethnic_num)])
+  end
 
-santa = []
+  puts ""
+  #puts "santa before"
+  p santa
+  santa.each {|santa_instance|  santa_instance.age = rand(140) }
+#santa[santa_instance].age(rand(140))
 
-diverse_list.each do |gender, ethnicity|
-  santa << Santa.new(gender, ethnicity)
+  puts ""
+  puts ""
+  #puts "santa after"
+  p santa
+  
+  santa.each do |instance| 
+    puts "This Santa's gender is #{instance.gender} and ethnicity is #{instance.ethnicity} is #{instance.age} years old "
+  end
 end
+  
+
 
 kris = Santa.new('male','irish')
 
+puts kris.age
 
 kris.celebrate_birthday
 puts kris.age
-kris.get_mad_at("Dasher")
+puts kris.ethnicity 
+#kris.get_mad_at("Dasher")
+puts kris.gender
 puts kris.gender= 'female'
+
+santa_simulator
