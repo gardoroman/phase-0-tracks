@@ -81,7 +81,7 @@ def santa_simulator(num_instances)
   
   #Printing out the attributes of every Santa instance
   santa.each do |instance| 
-    puts "This Santa's gender is #{instance.gender.capitalize} and ethnicity is #{instance.ethnicity.capitalize} is #{instance.age} years old "
+    puts "This Santa's gender is #{instance.gender.capitalize}, ethnicity is #{instance.ethnicity.capitalize}, age is #{instance.age} years old "
     puts ""
   end
 end
