@@ -3,8 +3,12 @@
 class Santa
 
   #Initializes the Santa instance
-  def initialize
+  def initialize(gender, ethnicity)
     puts "Initializing Santa instance"
+    @gender = gender
+    @ethnicity = ethnicity
+    @age = 0
+
   end
 
   #Prints a greeting from Santa instance
@@ -19,10 +23,30 @@ class Santa
   end
 end
 
-
 #DRIVER CODE
-kris_kringle = Santa.new
+kris_kringle = Santa.new('male', 'Inuit')
 
 kris_kringle.speak
 
 kris_kringle.eat_milk_and_cookies("Chocalate Chip")
+
+reindeer_ranking = ["Rudolph", "Dasher", "Dancer", "Prancer", "Vixen", "Comet", "Cupid", "Donner", "Blitzen"]
+
+diverse_list = [
+  ["female", "Inuit"],
+  ["male","Scottish"],
+  ["agender","Canadian"],
+  ["bigender","Black-Korean"],
+  ["trans","European"],
+  ["don't ask","Latino"],
+  ["m","Nigerian"],
+  ["f","Egyptian"]
+]
+
+santa = []
+
+diverse_list.each do |gender, ethnicity|
+  santa << Santa.new(gender, ethnicity)
+end
+
+puts santa
