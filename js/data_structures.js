@@ -7,8 +7,17 @@ colorArr.push("Papaya Whip");
 horseArr.push("Zander");
 
 
+/*
+Declare new object whose key will be a horse's name and value will be a color.
+Iterate through two arrays of equal length contain horse names and colors.
+*/
+var horseObj = {}
+for (i=0; i < colorArr.length; i++){
+  horseObj[colorArr[i]] = horseArr[i];
+}
 
 
 // DRIVER CODE
-console.log(colorArr);
-console.log(horseArr);
+
+
+console.log(horseObj);
