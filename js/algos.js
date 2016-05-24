@@ -61,15 +61,15 @@ function createWordArrays(array_length){
   var wordArray = [];
   var alphaString = 'abcdefghijklmnopqrstuvwxyz';
 
-  if (array_length != 0) {
-    for(var i = 0; i <= array_length; i++) {
-      randomWord = "";
-      for (var j = 0; j <= randomRange(1,10); j++)
-        //console.log('printing inner var' + j);
-        //wordArray.push(j);
-        randomWord +=
-    }
 
+  if (array_length != 0) {
+    for(var i = 0; i < array_length; i++) {
+      randomWord = "";
+      for (var j = 0; j < randomRange(1,10); j++) {
+        randomWord += alphaString[randomRange(0,26)];
+      }
+        wordArray.push(randomWord);
+    }
   }
 
   return wordArray;
@@ -105,6 +105,18 @@ console.log('\n');
 var artBlakey = {name: "Art Blakey", instrument: "Drums"};
 var johnBonham = {name: "John Bonham", instrument: "Drums"};
 var jimmyPage = {name: "Jimmy Page", instrument: "Guitar"};
+
+console.log("jimmys values");
+var ov;
+ov_a = []
+for (ov in jimmyPage){
+  if (typeof jimmyPage[ov] !== 'function'){
+    ov_a.push(ov)
+  }
+}
+
+console.log(ov_a);
+console.log('\n');
 console.log('Release 1: Example 1');
 console.log('Checking if ' + artBlakey.name + ' and ' + johnBonham.name + ' share any values');
 console.log('The answer is ' + compareObjectValues(artBlakey,johnBonham));
@@ -117,4 +129,11 @@ console.log('\n');
 
 //Release 2 driver code
 
-console.log(createWordArrays(5));
+
+for (inc = 1; inc <= 10; inc++){
+  var randomWordArray = createWordArrays(5);
+  console.log('Release 2: Example ' + inc);
+  console.log('Finding the longest phrase in the array: ' + randomWordArray);
+  console.log(findLongestWord(randomWordArray));
+  console.log('\n');
+}
