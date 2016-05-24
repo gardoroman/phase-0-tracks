@@ -34,7 +34,7 @@ The function will be passed two objects and their key-value
 pairs will be compared to determine if they equal.
 */
 function compareObjectValues(object1, object2){
-  if (object1.name === object2.name) || (object1.instrument == object2.instrument){
+  if ((object1.name === object2.name) || (object1.instrument == object2.instrument)){
     return true;
   } else {
     return false;
@@ -49,18 +49,29 @@ function compareObjectValues(object1, object2){
 
 //Release 0 driver code
 var wordArr1 = ["long phrase","longest phrase","longer phrase"];
-console.log('Example 1')
-console.log('Finding the longest phrase in the array: ' + wordArr1)
+console.log('Release 0: Example 1');
+console.log('Finding the longest phrase in the array: ' + wordArr1);
 console.log(findLongestWord(wordArr1));
-console.log('\n')
+console.log('\n');
 
 var wordArr2 = ['Jimmy Page', 'Robert Plant', 'John Paul Jones','John Bonham'];
-console.log('Example 2')
-console.log('Finding the longest phrase in the array: ' + wordArr2)
+console.log('Release 0: Example 2');
+console.log('Finding the longest phrase in the array: ' + wordArr2);
 console.log(findLongestWord(wordArr2));
-console.log('\n')
+console.log('\n');
 
 //Release 1 driver code
+var artBlakey = {name: "Art Blakey", instrument: "Drums"};
+var johnBonham = {name: "John Bonham", instrument: "Drums"};
+var jimmyPage = {name: "Jimmy Page", instrument: "Guitar"};
+console.log('Release 1: Example 1');
+console.log('Checking if ' + artBlakey.name + ' and ' + johnBonham.name + ' share any values');
+console.log('The answer is ' + compareObjectValues(artBlakey,johnBonham));
+console.log('\n');
+console.log('Release 1: Example 2');
+console.log('Checking if ' + artBlakey.name + ' and ' + jimmyPage.name + ' share any values');
+console.log('The answer is ' + compareObjectValues(artBlakey,jimmyPage));
+console.log('\n');
 
 
 //Release 2 driver code
