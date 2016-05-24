@@ -95,3 +95,20 @@ end
 
 #=======================================================================
 # Reflection Section
+# 
+#What are the differences between the two different hash syntaxes shown in the state_data file?
+# The state names used the hash rocket, while the population keys used the symbolic short cut.
+#
+#What does require_relative do? How is it different from require?
+# require_relative allows you to include files relative to the current directory of the current file.
+# Whereas require uses the load path to locate the required files.
+#
+#What are some ways to iterate through a hash?
+# some ways to iterate through a hash include each, map, each_key
+#
+#When refactoring virus_effects, what stood out to you about the variables, if anything?
+# The parameters where all instance variables. By using attr_reader it was unnecessary to
+# send variables to the method. They could instead be accessed as instance variables
+#
+#What concept did you most solidify in this challenge?
+# I was able to appreciate how instance variables make coding much easier.
