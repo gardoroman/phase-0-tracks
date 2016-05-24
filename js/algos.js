@@ -44,6 +44,47 @@ function compareObjectValues(object1, object2){
 //-------------------
 
 //Release 2 Function
+/*
+Create a function that creates an array whose length is
+determined by an integer passed in as a parameter.
+Every array element will contain a randomly generated word of varying
+length from 1 to 10 characters.
+A separate function (randomRange) will be create to generate the length of the word
+and the seed value for the random letters.
+The word will be generated from a string containing the characters of the
+alphabet.
+A nested loop will be created. The outer loop value will be equal to the array length
+passed in and inner loop value will be whatever length is randomly generated.
+*/
+function createWordArrays(array_length){
+  
+  var wordArray = [];
+  var alphaString = 'abcdefghijklmnopqrstuvwxyz';
+
+  if (array_length != 0) {
+    for(var i = 0; i <= array_length; i++) {
+      randomWord = "";
+      for (var j = 0; j <= randomRange(1,10); j++)
+        //console.log('printing inner var' + j);
+        //wordArray.push(j);
+        randomWord +=
+    }
+
+  }
+
+  return wordArray;
+}
+
+/*
+This function generates a random number between a minimum and maximum value
+passed in as parameters.
+*/
+
+function randomRange(min_num, max_num){
+  return Math.floor(Math.random() * (max_num) + min_num);
+}
+
+
 
 //##################### D R I V E R   C O D E ################################
 
@@ -75,3 +116,5 @@ console.log('\n');
 
 
 //Release 2 driver code
+
+console.log(createWordArrays(5));
