@@ -29,6 +29,8 @@ function Car(model, make, color, year){
     var currentYear = new Date().getFullYear();
     if(currentYear-this.year >=25){
       return true;
+    } else {
+      return false;
     }
   }
   
@@ -36,8 +38,13 @@ function Car(model, make, color, year){
 
 
 // DRIVER CODE for Release 0 .. 1
-// console.log(horseObj);
+console.log("Release 1");
+console.log(horseObj);
+console.log("\n");
  
 // DRIVER CODE for Release 2
+console.log("Release 2");
 var toyotaCorolla = new Car("Corolla","Toyota","Papaya Whip",1973);
-console.log("Is antique:" + toyotaCorolla.isAntique());
+console.log("The " + toyotaCorolla.year + " " + toyotaCorolla.make + " " + toyotaCorolla.model + " Is antique: " + toyotaCorolla.isAntique());
+var teslaModelS = new Car("Tesla","Model S","Mango Yellow",2016);
+console.log("The " + teslaModelS.year + " " + teslaModelS.make + " " + teslaModelS.model + " Is antique: " + teslaModelS.isAntique());
