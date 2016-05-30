@@ -1,0 +1,57 @@
+RELEASE 2
+1. Display the information in one table (either table is fine).
+
+select * from band;
+1|Led Zeppelin|true
+2|Cold Play|false
+3|Beatles|true
+4|One Direction|false
+
+2. Update an item that meets some condition (you can choose a condition that makes sense).
+
+ update band set band_name = "Coldplay" where band_id = 2;
+
+ 3. Display the information in both tables using one query.
+
+ select * from band, album where band_id = band_id_num;
+1|Led Zeppelin|true|1|Led Zeppelin|1969-01-12|1
+1|Led Zeppelin|true|2|Houses of the Holy|1971-11-08|1
+2|Coldplay|false|3|Parachutes|2000-07-10|2
+3|Beatles|true|4|Sgt. Pepper's Lonely Hearts Club Band|1967-06-01|3
+
+4. Display a narrower selection of columns (fewer columns than all of them, in other words) from both tables using one query.
+
+select band_name, album_name, release_date from band, album where band_id = band_id_num;
+Led Zeppelin|Led Zeppelin|1969-01-12
+Led Zeppelin|Houses of the Holy|1971-11-08
+Coldplay|Parachutes|2000-07-10
+Beatles|Sgt. Pepper's Lonely Hearts Club Band|1967-06-01
+
+5. Delete an item that meets some condition (you can choose a condition that makes sense).
+delete from band where band_id = 4;
+
+RELEASE 3
+2. Try a few different joins in your database, and record the commands and the output in queries.txt.
+sqlite> select *
+   ...> from band b inner join album a
+   ...> on band_id = band_id_num;
+1|Led Zeppelin|true|1|Led Zeppelin|1969-01-12|1
+1|Led Zeppelin|true|2|Houses of the Holy|1971-11-08|1
+2|Coldplay|false|3|Parachutes|2000-07-10|2
+3|Beatles|true|4|Sgt. Pepper's Lonely Hearts Club Band|1967-06-01|3
+
+sqlite> select band_name, album_name
+   ...> from band b left outer join album a
+   ...> on b.band_id = a.band_id_num;
+Led Zeppelin|Houses of the Holy
+Led Zeppelin|Led Zeppelin
+Coldplay|Parachutes
+Beatles|Sgt. Pepper's Lonely Hearts Club Band
+Wu-Tang Clan|
+The Jazz Messengers|
+Johnny Hates Jazz|
+
+select band_name, album_name
+   ...> from band b right outer join album a
+   ...> on b.band_id = a.band_id_num;
+Error: RIGHT and FULL OUTER JOINs are not currently supported
