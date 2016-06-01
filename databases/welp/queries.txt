@@ -1,0 +1,37 @@
+Release 2 Question 2
+
+sqlite> select *
+   ...> from users u inner join reviews r
+   ...> on u.id = r.user_id
+   ...> inner join business b
+   ...> on r.business_id = b.id;
+
+id|first_name|last_name|id|stars|comment|business_id|user_id|id|name
+1|John|Smith|1|3|Fixed my kitchen|4|1|4|Plumbing by Janet
+2|Eric|Mathison|2|1|There are better places|3|2|3|Lotus Yoga
+3|Erika|Marks|3|5|Great nightclub!|2|3|2|The Beagle Nightclub
+4|Cole|Herring|4|1|Worst place to have a wedding ever!|1|4|1|Grundy Hollow Wedding Chapel
+
+Release 2 Question 3
+
+sqlite> select u.first_name, u.last_name, b.name, r.stars, r.comment
+   ...> from users u inner join reviews r
+   ...> on u.id = r.user_id
+   ...> inner join business b
+   ...> on r.business_id = b.id;
+
+first_name|last_name|name|stars|comment
+John|Smith|Plumbing by Janet|3|Fixed my kitchen
+Eric|Mathison|Lotus Yoga|1|There are better places
+Erika|Marks|The Beagle Nightclub|5|Great nightclub!
+Cole|Herring|Grundy Hollow Wedding Chapel|1|Worst place to have a wedding ever!
+
+Release 2 Question 4
+sqlite> select u.first_name, u.last_name, b.name, r.stars, r.comment
+   ...> from users u inner join reviews r
+   ...> on u.id = r.user_id
+   ...> inner join business b
+   ...> on r.business_id = b.id
+   ...> where b.id = 1;
+first_name|last_name|name|stars|comment
+Cole|Herring|Grundy Hollow Wedding Chapel|1|Worst place to have a wedding ever!
