@@ -68,19 +68,28 @@ specified by the user.
   *user* 
 
     columns:
- 
+* user\_id (primary key) 
+* first\_name
+* last\_name 
 
-user\_id (primary key), first\_name,  last\_name 
-
-
+---
     table:
 
   *user\_session*
 
     columns:
 
- session\_id (primary key), user\_id (foreign key), assignment, date, day\_of\_week, time\_zone,
-earliest, latest, availability, partner\_id, status
+* session\_id (primary key)
+* user\_id (foreign key)
+* assignment
+* session_date
+* day\_of\_week
+* time\_zone
+* earliest_ts
+* latest_ts
+* availability
+* partner\_id
+* status
 ----
 
 #DATA STRUCTURES
