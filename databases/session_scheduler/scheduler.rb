@@ -16,16 +16,15 @@ assignment_hash = {
       }
 
 session_number =  ["2.2", "2.4", "3.2", "3.4", "4.3", "4.6", "5.2", "5.4", "6.2", "6.6", "7.2", "8.2", "8.4", "9.2", "9.5"]
-stan_tz = {"EST" => "-0500","CST" => "-0600","MST" => "-0700","PST" => "-0800","AKST" => "-0900","HAST" => "-1000"}
-dst_tz = {"EST" => "-0400","CST" => "-0500","MST" => "-0600","PST" => "-0700","AKST" => "-0800","HAST" => "-0900"}
+#stan_tz = {"EST" => "-0500","CST" => "-0600","MST" => "-0700","PST" => "-0800","AKST" => "-0900","HAST" => "-1000"}
+#dst_tz = {"EST" => "-0400","CST" => "-0500","MST" => "-0600","PST" => "-0700","AKST" => "-0800","HAST" => "-0900"}
 
 utc_offset = {"EST" => 5,"CST" => 6,"MST" => 7,"PST" => 8,"AKST" => 9,"HAST" => 10}
-dst_offset = {"EST" => 4,"CST" => 5,"MST" => 6,"PST" => 7,"AKST" => 8,"HAST" => 9}
 
 user_insert_string = "INSERT INTO users (first_name, last_name, user_tz) VALUES (?, ?, ?)"
 session_insert_string = 
 "INSERT INTO user_session 
-(user_id, assignment, session_date, session_tz, earliest, latest)
+(user_id, sess_num, session_date, session_tz, earliest, latest)
 VALUES (?, ?, ?, ?, ?, ?)"
 
 
@@ -48,13 +47,13 @@ create_session_db = <<-SQL
   CREATE TABLE IF NOT EXISTS user_session(
     user_id INT,
     sess_num VARCHAR(255),
-    session_date DATE,
+    session_date TEXT,
     session_tz VARCHAR(255),
-    earliest DATETIME,
-    latest DATETIME,
+    earliest INT,
+    latest INT,
     partner_id INT DEFAULT NULL,
     status VARCHAR(255) DEFAULT "Active",
-    PRIMARY KEY (user_id, session_date, partner_id),
+    PRIMARY KEY (user_id, sess_num, session_date, partner_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id)
   )
 SQL
@@ -73,39 +72,46 @@ def add_days(week, days)
   total_days = day_sum + week_sum
 end
 
+#takes in a database object a query and values to be loaded
 def insert_into_table(db, query_string, *args)
   db.execute(query_string, args)
 end
 
 =begin
-10.times do
-#  insert_into_table(db, user_insert_string, Faker::Name.first_name, Faker::Name.last_name, stan_tz[rand(6)]) 
+#UNCOMMENT TO LOAD USERS
+#loads users table
+20.times do
   insert_into_table(db, user_insert_string, Faker::Name.first_name, Faker::Name.last_name, stan_tz.keys[rand(stan_tz.length)]) 
 end
 =end
 
-user_recs = db.execute("select * from users")
-# increment week as follows time_val + (7*24*60*60)
+#This block of code creates randomize session data. Every test user will create 3 sessions per week per assignment.
 
+user_recs = db.execute("select * from users")
 comp_week = ""
 pref_date = Time.utc(2016,4,11)
 session_number.each do |sess|
+  temp_id = ""
   user_recs.each do |id|
-    #3.times do
-      ##puts "assignment #{sess} for user #{id['user_id']} and tz #{stan_tz[id['user_tz']]}"
+    sess_date = ""
+    3.times do
+      if temp_id != id['user_id']
+        sess_date = pref_date        
+        temp_id = id['user_id']
+      end
       
-      sess_date = pref_date + add_days(0,rand(3))
-      ##puts "sess date is #{sess_date}"
-      ##puts "original date is #{pref_date}"
+      #increments dates to ensure that the same user 
+      sess_date = sess_date + add_days(0,rand(2) + 1)
+      
       #check dst
-      utc_adjust = pref_date.dst? ? dst_offset[id['user_tz']] : utc_offset[id['user_tz']]
-      #utc adjust adds the hours back to get to utc.
+      utc_adjust = sess_date.dst? ? utc_offset[id['user_tz']] - 1 : utc_offset[id['user_tz']]
+      #The early and latest values which represent the beginning and end of possible session times are randomized as well.
+      #utc_adjust adds the hours back to get to utc.
       early = rand(10) + utc_adjust
       late = early + 2 + rand(4)
-      puts "#{id['user_id']} | #{sess} | #{sess_date} | #{stan_tz[id['user_tz']]} | #{early} | #{late}"
-      #p pref_date
-    #end
-    p ""
+      load_date = sess_date.strftime("%Y-%m-%d")
+      insert_into_table(db,session_insert_string,id['user_id'],sess,load_date,id['user_tz'],early,late)
+    end
   end
   sess_week = sess.split(".")[0]
   if sess_week != comp_week
@@ -113,21 +119,4 @@ session_number.each do |sess|
     comp_week = sess_week
   end
 end
-=begin
-  user_id, x
-  sess_num, x
-  session_date, declared above and incremented in loop
-  session_tz, retrieved from query and look up
-  earliest, x
-  latest)x
-=end
 
-
-#insert_into_table(db,session_insert_string, )
-=begin
-calculate a seed date
-for each session number
-  for each user id 3 times (representing a day)
-    for each day set earliest and latest
-    update user session
-=end
