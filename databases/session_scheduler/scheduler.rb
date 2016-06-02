@@ -4,14 +4,19 @@ require 'time'
 require 'sqlite3'
 require 'faker'
 
-user_dbname = "user.db"
-user_session_dbname = "user_session.db"
-# create SQLite3 database
-user_db = SQLite3::Database.new(user_db_name)
-user_db.results_as_hash = true
+user_insert_string = "INSERT INTO user (first_name, last_name) VALUES (?, ?)"
+session_insert_string = 
+"INSERT INTO user_session 
+(user_id, assignment, session_date,
+ day_of_week, session_tz, earliest_ts
+ latest_ts, availability, status)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-session_db = SQLite3::Database.new(user_session_dbname)
-session_db.results_as_hash = true
+
+#user_session_dbname = "user_session.db"
+# create SQLite3 database
+db = SQLite3::Database.new("schedule.db")
+db.results_as_hash = true
 
 # learn about fancy string delimiters
 create_user_db = <<-SQL
@@ -21,7 +26,7 @@ create_user_db = <<-SQL
     last_name VARCHAR(255)
   )
 SQL
-user_db.execute(create_user_db)
+db.execute(create_user_db)
 
 create_session_db = <<-SQL
   CREATE TABLE IF NOT EXISTS user_session(
@@ -39,5 +44,15 @@ create_session_db = <<-SQL
     FOREIGN KEY (user_id) REFERENCES user(user_id)
   )
 SQL
-session_db.execute(create_session_db)
+db.execute(create_session_db)
+
+
+def insert_into_table(db, query_string, *args)
+  db.execute(query_string, args)
+end
+
+50.times do
+  insert_into_table(db, user_insert_string, Faker::Name.first_name, Faker::Name.last_name)
+  #create_kitten(db, Faker::Name.name, Date.birthday(0,2))
+end
 
