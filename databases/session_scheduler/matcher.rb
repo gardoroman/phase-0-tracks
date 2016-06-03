@@ -15,7 +15,19 @@ require 'time'
 db = SQLite3::Database.new("schedule.db")
 db.results_as_hash = true
 
+def record_exists?(db, table_name, col_name, table_value)
+  result = db.execute("select * from #{table_name} where #{col_name} = #{table_value}")
+  if result.length == 0
+    return false
+  else
+    return true
+  end
+end
 
+#checks that dates have correct values and format
+def valid_date_format(input_date, date_segment, date_length)
+  
+end
 
 def find_match(db, search_date, user)
   query_string = 
@@ -61,11 +73,75 @@ def calculate_overlap(early1, early2, latest1, latest2)
   end
 end
 
-session_date = "'2016-04-29'"
 
-user_number = 5
 
-matches = find_match(db, session_date, user_number)
+def print_users(user_list)
+  puts "Current User Info"
+  user_list.each do |item |
+    puts "#{item['user_id']}: #{item['first_name']} #{item['last_name']}"
+  end
+end
+
+def print_dates(user_dates)
+  puts "User is available for pairing on the following dates:"
+  user_dates.each do |date|
+    puts "#{date['session_date']} for assignment #{date['session_id']}"
+  end
+end
+
+valid_id = false
+user_list =  db.execute("SELECT * FROM users where user_id ")
+
+while !valid_id
+  puts "Please select the user id of the user you want to look up:"
+  puts ""
+  print_users(user_list)
+  id_num = gets.chomp
+    if (id_num =~ /[1-9]/) 
+      id_num = id_num.to_i
+      if record_exists?(db, "'users'", "user_id", id_num)
+      #if record_exists?(db, "'users'", id_num)
+        valid_id = true
+      else
+        puts "User id does not exist please select from the list below."
+        puts ""
+        print_users(user_list)
+      end
+    else
+      puts "Please enter a valid integer starting with 1 or higher"
+      puts ""
+    end
+end
+
+user_dates = db.execute("select session_id, session_date from user_schedule where user_id = #{id_num}")
+
+#receive input
+#split it into 3 array items
+#check length and proper dates
+while !valid_date
+  puts "Please select a date to check the user's availability. Format must be YYYY-MM-DD for example 2001-10-02"
+  puts ""
+  print_dates(user_dates)
+  id_num = gets.chomp
+    if (id_num =~ /[1-9]/) 
+      id_num = id_num.to_i
+      if record_exists?(db, "'users'", "user_id", id_num)
+      #if record_exists?(db, "'users'", id_num)
+        valid_date = true
+      else
+        puts "User id does not exist please select from the list below."
+        puts ""
+        print_users(user_list)
+      end
+    else
+      puts "Please enter a valid integer starting with 1 or higher"
+      puts ""
+    end
+end
+
+session_date = "'2016-06-09'"
+puts record_exists?(db, "'user_schedule'", "session_date", "'2016-01-09'")
+matches = find_match(db, session_date, id_num)
 matches.each do |row|
   #puts "early 1 #{row["early1"].class} early 2 #{row["early2"]}"
   overlap = calculate_overlap(row["early1"],row["early2"],row["latest1"],row["latest2"])
