@@ -4,15 +4,16 @@ This project contains programs to create and maintain user schedules.
 *scheduler.rb* test data to simulate students adding their availability for 
 pairing sessions.
 
-*matcher.rb* allows a user to select their id from a list of users and
-find other students whose availability overlaps with the user's availability
+*matcher.rb* allows a user to select their id from a list of users,
+find other students whose availability overlaps with the user's availability,
+and book sessions based on availability
 
   
 #BUSINESS RULES
   
   * Users are allowed one entry per assignment, per day
   * A user's preferred time zone must be recorded
-  * All times are set to UTC to facilitate matching
+  * All times are set to UTC to facilitate matching between time zones
 
 ----
 
@@ -57,8 +58,9 @@ find other students whose availability overlaps with the user's availability
 
 * user\_id (foreign key)
 * session\_id (primary key)
-* assignment
+* session_id
 * session_date
+* session_tz
 * earliest
 * latest
 * partner\_id
@@ -82,3 +84,4 @@ find other students whose availability overlaps with the user's availability
 * Open timezone offsets to any region. Create database lookup for timezones and countries.
 * Once a match has been accepted any open sessions for that assignment will
   be removed.
+* Create more informative printouts, especially to provide schedule in the users local timezone.
