@@ -8,7 +8,21 @@ pairing sessions.
 find other students whose availability overlaps with the user's availability,
 and book sessions based on availability
 
-  
+
+#INSTRUCTIONS
+Only user scheduler.rb to create more records. 
+
+User matcher.rb to view student schedules and assign pairings.
+  * First you will be presented with student names and ids
+  * Select the id is looking for a pair
+  * A series of dates and assignments will appear for that student
+  * Select a date to see which other students are available
+  * If available students are found select an id
+  * - a list of available students will appear
+  * - select an id and a session will be booked
+  * If a student is not found the program will exit
+
+ 
 #BUSINESS RULES
   
   * Users are allowed one entry per assignment, per day
@@ -84,4 +98,5 @@ and book sessions based on availability
 * Open timezone offsets to any region. Create database lookup for timezones and countries.
 * Once a match has been accepted any open sessions for that assignment will
   be removed.
+* When a session for an assignment has been booked, delete other instances of that assignment for that user
 * Create more informative printouts, especially to provide schedule in the users local timezone.
