@@ -11,14 +11,17 @@ Later versions will convert the hours to the user's local time.
 require 'sqlite3'
 require 'time'
 
+#for formatting
+SPACES = " "
 
 db = SQLite3::Database.new("schedule.db")
 db.results_as_hash = true
 
-def record_exists?(db, table_name, col_name, table_value)
-  #puts "tname #{table_name} col #{col_name} val #{table_value}"
-  result = db.execute("select * from #{table_name} where #{col_name} = '#{table_value}'")
+#Checks that the user entered a valid user id number
+def user_exists?(db, id_num)
+  result = db.execute("select * from users where user_id = ?", [id_num])
   
+  #if there are no matches the user enter an incorrect id value for the user_id    
   if result.length == 0
     return false
   else
@@ -26,10 +29,11 @@ def record_exists?(db, table_name, col_name, table_value)
   end
 end
 
-def user_date_exists?(db, user_id, lookup_date)
-  #puts "tname #{table_name} col #{col_name} val #{table_value}"
-  result = db.execute("select * from user_schedule where user_id = '#{user_id}' and session_date = '#{lookup_date}'")
-  
+#Checks that user entered a valid date for the selected user id
+def date_exists?(db, user_id, lookup_date)
+  result = db.execute("select * from user_schedule where user_id = ? and session_date = ?", [user_id, lookup_date])
+
+  #if there are no matches the user enter an incorrect date value for the user_id
   if result.length == 0
     return false
   else
@@ -92,9 +96,14 @@ def find_match(db, search_date, user)
   match_recs = db.execute(query_string)
   
   if match_recs.length == 0
-    Kernel.abort("No matches found for this user for this day. Exiting program")
+    Kernel.abort("Session has been booked or does not exist for this user for this day. Exiting program")
   end  
   return match_recs
+end
+
+def update_session(db, p_id, status_type, u_id, session_date, session_id )
+  #query_string = "update user_schedule set partner_id = ?, status = ? where user_id = ? and session_date = ? and session_id = ?"
+  db.execute("update user_schedule set partner_id = ?, status = ? where user_id = ? and session_date = ? and session_id = ?", [p_id,status_type,u_id, session_date,session_id])
 end
 
 def convert_to_display_time(time_int)
@@ -145,8 +154,8 @@ while !valid_id
   id_num = gets.chomp
     if (id_num =~ /[1-9]/) 
       id_num = id_num.to_i
-      if record_exists?(db, "'users'", "user_id", id_num)
-      #if record_exists?(db, "'users'", id_num)
+      if user_exists?(db, id_num)
+      #if user_exists?(db, "'users'", id_num)
         valid_id = true
       else
         puts "User id does not exist please select from the list below."
@@ -174,7 +183,7 @@ while !valid_date
   search_date = gets.chomp
 
   if valid_date_format?(search_date)
-    if user_date_exists?(db, id_num, search_date)
+    if date_exists?(db, id_num, search_date)
       valid_date = true
     else
       puts "Date not found. Please select a date from the list below."
@@ -187,31 +196,42 @@ while !valid_date
 end
 
 
-paired_match = []
+paired_id = []
+paired_info = []
+user_name = ''
 matches = find_match(db, search_date, id_num)
 
 #puts matches[0]['name1']
 puts ""
 match_count = 0
 matches.each do |row|
-  overlap = calculate_overlap(row["early1"],row["early2"],row["latest1"],row["latest2"])
+  overlap = calculate_overlap(row["early1"],row["early2"],row["latest1"],row["latest2"])                
+  header = "User ID  | Partner Name (first 30 chars) | Date       | From (UTC) | To (UTC)" 
   if overlap
     if match_count == 0
-      puts "#{matches[0]['name1']} can work on assignment #{matches[0]['session_id']} with the following students: "
       puts ""
+      puts "#{matches[0]['name1']} can work on assignment #{matches[0]['session_id']} with the following students: "
+      user_name = matches[0]['name1']
+      puts header
     end
-    #puts "#{row['name1']} can work on assignment #{row['session_id']} with #{row['name2']} on #{row['session_date']} from #{overlap[0]} to #{overlap[1]} UTC"
-    puts "select one --> #{row['id2']} <-- #{row['name2']} on #{row['session_date']} from #{overlap[0]} to #{overlap[1]} UTC"
-    paired_match << row['id2']
+    id2 = row['id2'].to_s
+    name2 = row['name2'].slice(0..29)
+    s_date = row['session_date']
+    to_date = overlap[0]
+    from_date = overlap[1]
+    #puts "select one --> #{row['id2']} <-- #{row['name2']} on #{row['session_date']} from #{overlap[0]} to #{overlap[1]} UTC"
+    #puts "#{id2}#{SPACES * (10-id2.length)}#{name2}#{SPACES * (31-name2.length)}"
+    print "#{id2}#{SPACES * (11-id2.length)}#{name2}#{SPACES * (32-name2.length)}#{s_date}#{SPACES * (13-s_date.length)}"
+    puts "#{to_date}#{SPACES * (13-to_date.length)}#{from_date}"
+    #paired_info.push(row['id2'], row['name2'], row['session_date'], row['session_id'], overlap[0], overlap[1])
+    paired_info << row
+    paired_id << row['id2']
     match_count +=1
   end
   if match_count == 0
     Kernel.abort("No matches found for this user for this day. Exiting program")
   end
 end
-
-puts paired_match
-
 
 
 valid_partner = false
@@ -222,20 +242,43 @@ valid_partner = false
 # 3. retrieve records
 # 4. print message that says name1 has paired with name 2 on assignment (session id)
 
+partner_info = []
 while !valid_partner
   puts ""
   puts "Please select the user id of the person to paired"
+  #p paired_id
   partner = gets.chomp.to_i
-  if paired_match.include?(partner)
+  if paired_id.include?(partner)
     #once a pair is selected, copy find match code and retrieve and print records
     #with changed status
-    puts "The number is #{partner}"
     valid_partner = true
+    partner_info = paired_info.find_all do |rec|
+      rec['id2'] == partner
+    end
   else
-    puts "user id not found please select from the list below"
-    puts ""
-    puts paired_match
+    puts "user id not found please select from the user ids above"
     puts ""
   end
 end
 
+user_name1 = partner_info[0]['name1']
+user_name2 = partner_info[0]['name2']
+uid_1 = partner_info[0]['id1']
+uid_2 = partner_info[0]['id2']
+sess_date = partner_info[0]['session_date']
+sess_id = partner_info[0]['session_id']
+
+sess_status = "Booked"
+
+
+
+#update status of the user
+update_session(db,uid_1, "Booked", uid_2, sess_date, sess_id)
+
+#update the state of the partner
+update_session(db,uid_2, "Booked", uid_1, sess_date, sess_id)
+
+puts ""
+puts "Session for assignment #{sess_id} has been booked on #{sess_date} for #{user_name1} and #{user_name2}"
+puts ""
+puts "Goodbye!"
