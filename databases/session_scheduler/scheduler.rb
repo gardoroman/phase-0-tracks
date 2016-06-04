@@ -1,4 +1,6 @@
 #scheduler.rb creates test data to load into the user_schedule table.
+#WARNING rerunning this multiple times will add many records to user_schedule. 
+#It is recommended to drop the table so that working with the data is not too cumbersome.
 
 require 'time'
 require 'sqlite3'
