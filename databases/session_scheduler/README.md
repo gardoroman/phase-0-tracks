@@ -1,7 +1,7 @@
 #PURPOSE
 This project contains programs to create and maintain user schedules.
 
-*scheduler.rb* test data to simulate students adding their availability for 
+*scheduler.rb* creates test data to simulate students adding their availability for 
 pairing sessions.
 
 *matcher.rb* allows a user to select their id from a list of users,
