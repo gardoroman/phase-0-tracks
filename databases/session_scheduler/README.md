@@ -1,25 +1,24 @@
-#PURPOSE
+#SUMMARY
 This project contains programs to create and maintain user schedules.
 
-*scheduler.rb* test data to simulate students adding their availability for 
-pairing sessions.
+###scheduler.rb
+Creates test data to simulate students adding their availability for pairing sessions.
 
-*matcher.rb* allows a user to select their id from a list of users,
-find other students whose availability overlaps with the user's availability,
-and book sessions based on availability
+###matcher.rb
+Allows a user to select their id from a list of users, find other students whose availability overlaps with the user's availability, and book sessions based on availability
 
 
 #INSTRUCTIONS
-Only user scheduler.rb to create more records. 
+scheduler.rb should be used to create test records. 
 
-User matcher.rb to view student schedules and assign pairings.
+matcher.rb is used to view student schedules and assign pairings.
   * First you will be presented with student names and ids
-  * Select the id is looking for a pair
+  * Select the id representing the student who is looking for a pair
   * A series of dates and assignments will appear for that student
   * Select a date to see which other students are available
-  * If available students are found select an id
+  * If available students are found:
   * - a list of available students will appear
-  * - select an id and a session will be booked
+  * - select a student id and a session will be booked
   * If a student is not found the program will exit
 
  
@@ -39,7 +38,7 @@ User matcher.rb to view student schedules and assign pairings.
 
     Matches
 
-  * Matches will be performed where partner\_id is NULL
+  * A search will be performed to find matches by selecting users whose partner\_id is NULL
   * Matches occur when there is a minimum of an hour overlap between the
     availability of two students
 
@@ -83,7 +82,7 @@ User matcher.rb to view student schedules and assign pairings.
 
 #OPEN ISSUES
 
-  * placeholder
+  * In its current state, a student can book two different assignments on the same day during conflicting time frames. This should be prevented in future releases. At a minimum, the *status* column should mark the conflicting time frames and send a notice to the user before booking the session.
 
 
 #CURRENT RELEASE
@@ -96,7 +95,9 @@ User matcher.rb to view student schedules and assign pairings.
 ----
 * Create a file to read in assignments as opposed to hard coding hash values.
 * Open timezone offsets to any region. Create database lookup for timezones and countries.
-* Once a match has been accepted any open sessions for that assignment will
-  be removed.
+* Once a match has been accepted any open sessions for that assignment will be removed.
 * When a session for an assignment has been booked, delete other instances of that assignment for that user
 * Create more informative printouts, especially to provide schedule in the users local timezone.
+* In its current state, a student can book two different assignments on the same day during conflicting time
+  frames. This should be prevented in future releases. At a minimum, the status column should mark the
+  the conflicting time frames and send a notice to the user before booking the session.
