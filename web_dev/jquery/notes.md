@@ -11,3 +11,5 @@
 # RELEASE 1
 
 ## Execute Plan
+
+* The best strategy for me was to find a good resource and work through the examples given.
