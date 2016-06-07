@@ -1,0 +1,24 @@
+p {
+  height: 100px;
+  width: 100px;
+}
+
+#para-hide {
+  background-color: blue;
+  color: white;
+}
+
+#para-slide-up {
+  background-color: black;
+  color: white;
+}
+
+#para-slide-down{
+  display: none;
+  background-color: red;
+  color: yellow;
+}
+
+#para-hover{
+  background-color: yellow;
+}
