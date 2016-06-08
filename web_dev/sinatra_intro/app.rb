@@ -54,7 +54,7 @@ get '/contact' do
   "633 Clark St, Evanston, IL 60208"
 end
 
-# write a GET that takes a person's name and displays Good Job
+# write a GET route that takes a person's name and displays Good Job
 get '/great_job' do
   name = params[:name]
   if name
@@ -62,4 +62,11 @@ get '/great_job' do
   else
     "Good job!"
   end
+end
+
+# write a GET route that adds two route parameters
+get '/:num1/plus/:num2' do
+  num1 = params[:num1].to_i
+  num2 = params[:num2].to_i
+  "the result is #{num1 + num2}"
 end
