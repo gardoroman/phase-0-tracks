@@ -1,5 +1,6 @@
 # require gems
 require 'sinatra'
+require 'sinatra/reloader' if development?
 require 'sqlite3'
 
 db = SQLite3::Database.new("students.db")
@@ -42,5 +43,52 @@ end
 
 get '/students/:id' do
   student = db.execute("SELECT * FROM students WHERE id=?", [params[:id]])[0]
-  student.to_s
+  "#{student.to_s}"
+end
+
+#  R E L E A S E :  0
+
+# write a GET route that displays an address
+
+get '/contact' do
+  "633 Clark St, Evanston, IL 60208"
+end
+
+# write a GET route that takes a person's name and displays Good Job
+# to get the message type /great_job?name=[name]
+#example /great_job?name=Superman
+get '/great_job' do
+  name = params[:name]
+  if name
+    "Good job, #{params[:name]}!"
+  else
+    "Good job!"
+  end
+end
+
+# write a GET route that adds two route parameters
+get '/:num1/plus/:num2' do
+  num1 = params[:num1].to_i
+  num2 = params[:num2].to_i
+  "the result is #{num1 + num2}"
+end
+
+
+
+# write a GET route that retrieves students by campus
+# to search for students on a campus type in /student_location/[city name]
+# example: /student_location/NYC
+get '/student_location/:campus' do
+    #{}"#{params[:campus]}"
+  campus = params[:campus]
+  "#{campus}"
+  students = db.execute("SELECT id, name, age FROM students WHERE campus=?", [campus])
+  #student = db.execute("SELECT id, name, age FROM students WHERE campus=?", [:campus])
+  response = ""
+  students.each do |student|
+    response << "ID: #{student['id']}<br>"
+    response << "Name: #{student['name']}<br>"
+    response << "Age: #{student['age']}<br>"
+  end
+  response
 end
