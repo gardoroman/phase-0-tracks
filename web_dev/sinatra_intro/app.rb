@@ -46,8 +46,20 @@ get '/students/:id' do
   student.to_s
 end
 
+#  R E L E A S E :  0
+
 # write a GET route that displays an address
 
 get '/contact' do
   "633 Clark St, Evanston, IL 60208"
+end
+
+# write a GET that takes a person's name and displays Good Job
+get '/great_job' do
+  name = params[:name]
+  if name
+    "Good job, #{params[:name]}!"
+  else
+    "Good job!"
+  end
 end
