@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Student Info by Campus</h1>
+  <h2>Student Info by Campus</h2>
   <p>Here you will find basic information on each campus</p>
   <table>
     <tr>
@@ -21,6 +21,21 @@
       </tr>
       <% end %>
   </table>
+  <h2>Student Info by Campus</h2>
+  <p>Here is a list of campuses</p>
+  <table>
+    <tr>
+      <th>Campus Code</th>
+      <th>Campus Name</th>
+    </tr>
+      <% @campuses.each do |campus| %>
+      <tr>
+          <td><%= campus['campus_code'] %></td>
+          <td><%= campus['campus_name'] %></td>
+      </tr>
+      <% end %>
+    </table>
+  </ul>
 </body>
 </html>
 
