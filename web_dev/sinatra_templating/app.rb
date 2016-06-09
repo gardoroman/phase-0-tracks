@@ -19,6 +19,7 @@ get '/students/new' do
 end
 
 get '/campus' do
+  @campus_info = db.execute("select campus, round(avg(age),1) avg_age, count(*) counts from students group by campus")
   erb :campus
 end
 

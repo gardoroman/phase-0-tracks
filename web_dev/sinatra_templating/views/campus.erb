@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Campus</title>
-  </head>
-  <body>
-    <p>campus</p>
-  </body>
+<head>
+  <title>Student Info by Campus</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Student Info by Campus</h1>
+  <p>Here you will find basic information on each campus</p>
+  <table>
+    <tr>
+      <th>Campus</th>
+      <th>Average Age</th>
+      <th>Number of Students</th>
+    </tr>
+      <% @campus_info.each do |school| %>
+      <tr>
+        <td><%=school['campus']%></td>
+        <td><%=school['avg_age']%></td>
+        <td><%=school['counts']%></td>
+      </tr>
+      <% end %>
+  </table>
+</body>
 </html>
+
